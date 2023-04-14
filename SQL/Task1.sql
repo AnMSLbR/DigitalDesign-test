@@ -1,11 +1,11 @@
-/*1. Сотрудник с максимальной заработной платой*/
+/*1. РЎРѕС‚СЂСѓРґРЅРёРє СЃ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ Р·Р°СЂР°Р±РѕС‚РЅРѕР№ РїР»Р°С‚РѕР№*/
 SELECT * FROM EMPLOYEE WHERE SALARY = (SELECT MAX(SALARY) FROM EMPLOYEE);
 
-/*2. Максимальная длина цепочки руководителей по таблице сотрудников*/
+/*2. РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР»РёРЅР° С†РµРїРѕС‡РєРё СЂСѓРєРѕРІРѕРґРёС‚РµР»РµР№ РїРѕ С‚Р°Р±Р»РёС†Рµ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ*/
 WITH EMPLOYEE_TREE AS (
     SELECT ID, CHEF_ID, 1 AS DEPTH
     FROM EMPLOYEE
-    WHERE CHEF_ID IS NULL --корневые сотрудники, у которых не указан руководитель
+    WHERE CHEF_ID IS NULL --РєРѕСЂРЅРµРІС‹Рµ СЃРѕС‚СЂСѓРґРЅРёРєРё, Сѓ РєРѕС‚РѕСЂС‹С… РЅРµ СѓРєР°Р·Р°РЅ СЂСѓРєРѕРІРѕРґРёС‚РµР»СЊ
     UNION ALL
     SELECT e.ID, e.CHEF_ID, et.DEPTH + 1 AS DEPTH
     FROM EMPLOYEE e
@@ -14,7 +14,7 @@ WITH EMPLOYEE_TREE AS (
 SELECT MAX(DEPTH) AS MAX_DEPTH
 FROM EMPLOYEE_TREE;
 
-/*3. Отдел, с максимальной суммарной зарплатой сотрудников*/
+/*3. РћС‚РґРµР», СЃ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ СЃСѓРјРјР°СЂРЅРѕР№ Р·Р°СЂРїР»Р°С‚РѕР№ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ*/
 WITH SALARIES_BY_DEPARTMENT AS (
     SELECT D.NAME, SUM(E.SALARY) AS TOTAL_SALARY,
            RANK() OVER (ORDER BY SUM(E.SALARY) DESC) AS RANK
@@ -26,5 +26,5 @@ SELECT NAME, TOTAL_SALARY
 FROM SALARIES_BY_DEPARTMENT
 WHERE RANK = 1;
 
-/*4. Сотрудник, чье имя начинается на «Р» и заканчивается на «н»*/
-SELECT * FROM EMPLOYEE WHERE NAME LIKE 'Р%н';
+/*4. РЎРѕС‚СЂСѓРґРЅРёРє, С‡СЊРµ РёРјСЏ РЅР°С‡РёРЅР°РµС‚СЃСЏ РЅР° В«Р В» Рё Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РЅР° В«РЅВ»*/
+SELECT * FROM EMPLOYEE WHERE NAME LIKE 'Гђ%Г­';
