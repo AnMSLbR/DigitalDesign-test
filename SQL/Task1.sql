@@ -27,4 +27,4 @@ FROM SALARIES_BY_DEPARTMENT
 WHERE RANK = 1;
 
 /*4. Сотрудник, чье имя начинается на «Р» и заканчивается на «н»*/
-SELECT * FROM EMPLOYEE WHERE NAME LIKE 'Ð%í';
+SELECT * FROM EMPLOYEE WHERE NAME LIKE 'Р%н';
