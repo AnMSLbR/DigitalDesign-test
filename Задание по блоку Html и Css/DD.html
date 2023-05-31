@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" lang="ru">
   <title>Starship</title>
@@ -37,11 +38,13 @@
 
     p {
       font-size: 20px;
+      text-indent: 40px;
     }
 
     li {
       font-size: 20px;
     }
+
     a {
       color: white;
     }
@@ -71,7 +74,7 @@
       border-radius: 5px;
       margin-bottom: 20px;
     }
-    
+
     input[type="text"],
     input[type="email"],
     select {
@@ -82,7 +85,7 @@
       border-radius: 5px;
       box-sizing: border-box;
     }
-    
+
     button {
       background-color: #4CAF50;
       color: #ffffff;
@@ -90,11 +93,24 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 16px;
     }
-    
+
     button:hover {
       background-color: #45a049;
     }
+
+    .form-container {
+      margin-bottom: 20px;
+    }
+
+    .form-container input[type="radio"] {
+      margin-bottom: 15px;
+    }
+    
+    label {
+    font-size: 20px;
+  }
   </style>
 </head>
 
@@ -105,8 +121,10 @@
   </header>
   <div class="container">
     <div class="column">
-      <img src="https://avatars.dzeninfra.ru/get-zen_doc/2419806/pub_5f5644812bf8ae1b72e1effd_5f564d9e90805024927bbc66/scale_1200" alt="Sectional model">
+      <img
+        src="https://avatars.dzeninfra.ru/get-zen_doc/2419806/pub_5f5644812bf8ae1b72e1effd_5f564d9e90805024927bbc66/scale_1200" alt="Sectional model">
       <img src="https://i.ytimg.com/vi/o_PTtcaimhY/maxresdefault.jpg" alt="Super Heavy">
+      <img src="https://media.cnn.com/api/v1/images/stellar/prod/230416185608-01-spacex-starship-launch-test-handout.jpg?c=16x9&q=h_720,w_1280,c_fill" alt="Launchpad">
     </div>
 
     <div class="column">
@@ -119,7 +137,7 @@
           низкую околоземную, солнечно-синхронную и геопереходную орбиты, а также для межпланетных полётов на Луну и
           Марс. Самая
           большая по массе и размерам и самая мощная ракета-носитель в истории.</p>
-        <p>Планируется, что в случае успешной разработки Starship заменит все существующие ракеты и космические
+        <p> Планируется, что в случае успешной разработки Starship заменит все существующие ракеты и космические
           транспортные
           системы SpaceX (Falcon 9, Falcon Heavy и Dragon) уже в начале 2020-х годов. По оценкам SpaceX, запуски
           Starship будут
@@ -140,39 +158,61 @@
         </ul>
       </div>
 
-  <form action="http//localhost/mail" method="post">
-    <label for="name">ФИО:</label>
-    <input type="text" id="name" name="name" required>
-  
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-  
-    <label for="frequency">Частота рассылки:</label>
-    <select id="frequency" name="frequency" required>
-      <option value="" disabled selected hidden>Выберите частоту</option>
-      <option value="weekly">Еженедельный дайджест</option>
-      <option value="daily">Ежедневно</option>
-    </select>
-  
-    <input type="checkbox" id="launches" name="interests" value="launches">
-    <label for="launches">Запуски</label>
-  
-    <input type="checkbox" id="spacex" name="interests" value="spacex">
-    <label for="spacex">Новости SpaceX</label>
-  
-    <input type="checkbox" id="construction" name="interests" value="construction">
-    <label for="construction">Новости со строительной площадки</label>
-  
-    <button type="submit">Отправить</button>
-  </form>
+      <form action="http//localhost/mail" method="post" class="form-container">
+        <h3>Новостная рассылка</h3>
+        <label for="name">ФИО:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="frequency">Частота рассылки:</label>
+        <select id="frequency" name="frequency" required>
+          <option value="" disabled selected hidden>Выберите частоту</option>
+          <option value="weekly">Еженедельный дайджест</option>
+          <option value="daily">Ежедневно</option>
+        </select>
+
+        <input type="checkbox" id="launches" name="interests" value="launches">
+        <label for="launches">Запуски</label>
+
+        <input type="checkbox" id="spacex" name="interests" value="spacex">
+        <label for="spacex">Новости SpaceX</label>
+
+        <input type="checkbox" id="construction" name="interests" value="construction">
+        <label for="construction">Новости со строительной площадки</label>
+
+        <button type="submit">Отправить</button>
+      </form>
+
+      <form action="http//localhost/mail" method="post" class="form-container">
+        <h3>Лучшая новость недели</h3>
+        <input type="radio" id="news1" name="best-news" value="news1" checked>
+        <label for="news1">SpaceX Starship успешно достигла орбиты и выполнит первую пилотируемую миссию на Марс</label><br>
+
+        <input type="radio" id="news2" name="best-news" value="news2">
+        <label for="news2">Starship установила новый рекорд доставки груза на Международную космическую станцию</label><br>
+
+        <input type="radio" id="news3" name="best-news" value="news3">
+        <label for="news3">SpaceX объявила о партнерстве с NASA для использования Starship в миссиях на Луну</label><br>
+
+        <input type="radio" id="news4" name="best-news" value="news4">
+        <label for="news4">Впервые за десятилетия SpaceX Starship превзошла мощностью и грузоподъемностью Saturn V</label><br>
+
+        <input type="radio" id="news5" name="best-news" value="news5">
+        <label for="news5">Starship успешно провела испытательный полет на межзвездную орбиту, открывая путь к звездам</label><br>
+
+        <button type="submit">Отправить</button>
+      </form>
     </div>
   </div>
   <footer>
     <div class="links">
-        <p><a href="https://www.spacex.com/starship" target="_blank">Официальный сайт Starship</a></p>
-        <p><a href="https://www.youtube.com/@SpaceX" target="_blank">Ютуб канал</a></p>
+      <p><a href="https://www.spacex.com/starship" target="_blank">Официальный сайт Starship</a></p>
+      <p><a href="https://www.youtube.com/@SpaceX" target="_blank">Ютуб канал</a></p>
     </div>
-        &copy; 2023 Ildar Mindiiarov
+    &copy; 2023 Ildar Mindiiarov
   </footer>
 </body>
+
 </html>
