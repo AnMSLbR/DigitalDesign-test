@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" lang="ru">
+  <title>Starship</title>
+  <style>
+    body {
+      background-color: #3532381f;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-image: url(https://www.ixbt.com/img/n1/news/2023/0/2/image_large.jpg);
+      background-size: cover;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+    
+    select{
+      font-size: 18px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    
+    label {
+      font-size: 20px;
+    }
+        ul {
+      margin: 5px;
+    }
+    li {
+      font-size: 20px;
+      text-indent: 0px;
+    }
+    p {
+      margin: 5px;
+    }
+
+    a {
+      color: white;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    h2{
+      margin: 0px 0px 10px 0px ;
+    }
+
+    h3{
+      margin: 0px 0px 10px 0px ;
+    }
+
+    h4{
+      margin: 0px 0px 10px 5px ;
+    }
+    
+    .container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 30px;
+    }
+
+    .column {
+      flex-basis: 50%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .description {
+      background-color: #ffffff;
+      font-size: 20px;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      text-indent: 40px;
+    }
+
+    .form-container {
+      margin-bottom: 20px;
+    }
+
+    .form-container input[type="radio"] {
+      margin-bottom: 15px;
+    }
+    
+    .news-checkboxs {
+      margin-bottom: 10px;
+    }
+
+    .weather-container {
+      margin-bottom: 20px;
+      font-size: 20px;
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      flex-wrap: nowrap;
+    }
+
+    .weather-card {
+      background-color: #ffffff;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      flex-basis: 50%;
+      align-self: stretch;
+    }
+
+    .weather-icon {
+      width: 50px;
+      height: 50px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>STARSHIP</h1>
+    <h4>SERVICE TO EARTH ORBIT, MOON, MARS AND BEYOND</h4>
+  </header>
+  <div class="container">
+    <div class="column">
+      <img
+        src="https://avatars.dzeninfra.ru/get-zen_doc/2419806/pub_5f5644812bf8ae1b72e1effd_5f564d9e90805024927bbc66/scale_1200" alt="Sectional model">
+      <img src="https://i.ytimg.com/vi/o_PTtcaimhY/maxresdefault.jpg" alt="Super Heavy">
+      <img src="https://media.cnn.com/api/v1/images/stellar/prod/230416185608-01-spacex-starship-launch-test-handout.jpg?c=16x9&q=h_720,w_1280,c_fill" alt="Launchpad">
+    </div>
+
+    <div class="column">
+      <h2>SpaceX Starship</h2>
+      <div class="description">
+        <p>Разрабатываемая компанией SpaceX многофункциональная, полностью многоразовая двухступенчатая система из
+          сверхтяжёлой
+          ракеты-носителя Super Heavy и космического корабля Starship, предназначенная для экономичной доставки грузов и
+          людей на
+          низкую околоземную, солнечно-синхронную и геопереходную орбиты, а также для межпланетных полётов на Луну и
+          Марс. Самая
+          большая по массе и размерам и самая мощная ракета-носитель в истории.</p>
+        <p>Планируется, что в случае успешной разработки Starship заменит все существующие ракеты и космические
+          транспортные
+          системы SpaceX (Falcon 9, Falcon Heavy и Dragon) уже в начале 2020-х годов. По оценкам SpaceX, запуски
+          Starship будут
+          дешевле, чем запуски других систем. По оценке президента Pioneer Astronautics Роберта Зубрина, в качестве
+          системы
+          доставки на Луну стоимость программы Starship составит лишь 1 % от стоимости программ на основе Saturn V
+          1960-х годов
+          или на основе современной SLS в сопоставимых ценах.</p>
+        <p>Starship может использоваться для следующих целей:</p>
+        <ul>
+          <li>запуски на низкую околоземную орбиту (НОО);</li>
+          <li>исследование Марса, включая как миссии с отправкой грузов, так и пилотируемые миссии;</li>
+          <li>согласно полученной от Илона Маска информации, технологические «потомки» корабля смогут совершать
+            межзвёздные полёты;</li>
+          <li>коммерческие перелёты по Земле на большие дистанции: возможность отправки людей в суборбитальных полётах в
+            любую точку
+            Земли в течение 1 часа.</li>
+        </ul>
+      </div>
+
+      <form action="http//localhost/mail" method="post" class="form-container">
+        <h3>Новостная рассылка</h3>
+        <label for="name">ФИО:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="frequency">Частота рассылки:</label>
+        <select id="frequency" name="frequency" required>
+          <option value="" disabled selected hidden>Выберите частоту</option>
+          <option value="weekly">Еженедельный дайджест</option>
+          <option value="daily">Ежедневно</option>
+        </select>
+
+        <div class="news-checkboxs">
+          <input type="checkbox" id="launches" name="interests" value="launches">
+          <label for="launches">Запуски</label>
+  
+          <input type="checkbox" id="spacex" name="interests" value="spacex">
+          <label for="spacex">Новости SpaceX</label>
+  
+          <input type="checkbox" id="construction" name="interests" value="construction">
+          <label for="construction">Новости со строительной площадки</label>
+       </div>
+
+        <button type="submit">Отправить</button>
+      </form>
+
+      <form action="http//localhost/news" method="post" class="form-container">
+        <h3>Лучшая новость недели</h3>
+        <input type="radio" id="news1" name="best-news" value="news1" checked>
+        <label for="news1">SpaceX Starship успешно достигла орбиты и выполнит первую пилотируемую миссию на Марс</label><br>
+
+        <input type="radio" id="news2" name="best-news" value="news2">
+        <label for="news2">Starship установила новый рекорд доставки груза на Международную космическую станцию</label><br>
+
+        <input type="radio" id="news3" name="best-news" value="news3">
+        <label for="news3">SpaceX объявила о партнерстве с NASA для использования Starship в миссиях на Луну</label><br>
+
+        <input type="radio" id="news4" name="best-news" value="news4">
+        <label for="news4">Впервые за десятилетия SpaceX Starship превзошла мощностью и грузоподъемностью Saturn V</label><br>
+
+        <input type="radio" id="news5" name="best-news" value="news5">
+        <label for="news5">Starship успешно провела испытательный полет на межзвездную орбиту, открывая путь к звездам</label><br>
+
+        <button type="submit">Отправить</button>
+      </form>
+
+    <h2>Погода на стартовых площадках</h2>
+    <div class="weather-container">
+      <div class="weather-card" id="weather-boca-chica"></div>
+      <div class="weather-card" id="weather-cape-canaveral"></div>
+    </div>
+
+    </div>
+  </div>
+  <footer>
+    <div class="links">
+      <p><a href="https://www.spacex.com/starship" target="_blank">Официальный сайт Starship</a></p>
+      <p><a href="https://www.youtube.com/@SpaceX" target="_blank">Ютуб канал</a></p>
+    </div>
+    &copy; 2023 Ildar Mindiiarov
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      getWeather("Boca Chica", "weather-boca-chica");
+      getWeather("Cape Canaveral", "weather-cape-canaveral");
+      setInterval(function () {
+        getWeather("Boca Chica", "weather-boca-chica");
+        getWeather("Cape Canaveral", "weather-cape-canaveral");
+      }, 10 * 60 * 1000);
+    });
+
+    function getWeather(location, elementId) {
+      let xhr = new XMLHttpRequest();
+      let apiKey = "80456038b0cc4ce890181158230306";
+      let url = "https://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=" + encodeURIComponent(location) + "&lang=ru";
+
+      xhr.open("GET", url, true);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            let response = JSON.parse(xhr.responseText);
+            let temperature = response.current.temp_c;
+            let condition = response.current.condition.text;
+            let windSpeed = response.current.wind_kph;
+            let iconUrl = response.current.condition.icon;
+
+            let weatherElement = document.getElementById(elementId);
+            weatherElement.innerHTML = "<h4>" + getRussianLocation(location) + " <img src='https:" + iconUrl + "' alt='Иконка погоды' class='weather-icon'></h4><p>Температура: " + temperature + "°C</p><p>Состояние: " + condition + "</p><p>Скорость ветра: " + windSpeed + " км/ч</p>";
+          } else {
+            console.log("Ошибка при получении погоды: " + xhr.status);
+          }
+        }
+      };
+
+      xhr.send();
+    }
+    function getRussianLocation(location) {
+      let russianNames = {
+        "Boca Chica": "Бока-Чика",
+        "Cape Canaveral": "Мыс Канаверал"
+      };
+      return russianNames[location] || location;
+    }
+  </script>
+</body>
+</html>
