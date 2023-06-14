@@ -30,51 +30,94 @@ GROUP BY A.City
 ORDER BY Unique_customers DESC;
 
 -- Задание 4. Выбрать покупателей, купивших больше 15 единиц одного и того же продукта за все время работы компании.
-SELECT C.LastName AS LastName, C.FirstName AS FirstName, P.Name AS Product, SUM(SOD.OrderQty) AS Qty
-FROM Sales.SalesOrderDetail SOD
-INNER JOIN Sales.SalesOrderHeader SOH ON SOD.SalesOrderID = SOH.SalesOrderID
-INNER JOIN Person.Person C ON SOH.CustomerID = C.BusinessEntityID
-INNER JOIN Production.Product P ON SOD.ProductID = P.ProductID
+-- Вариант с выводом покупателя в несколько строк, если он имеет несколько разных товаров: 
+SELECT
+    p.LastName AS LastName,
+    p.FirstName AS FirstName,
+    pr.Name AS Product,
+    SUM(sod.OrderQty) AS OrderQty
+FROM
+    Sales.SalesOrderHeader AS soh
+    JOIN Sales.Customer AS c ON soh.CustomerID = c.CustomerID
+    JOIN Person.Person AS p ON c.PersonID = p.BusinessEntityID
+    JOIN Sales.SalesOrderDetail AS sod ON soh.SalesOrderID = sod.SalesOrderID
+    JOIN Production.Product AS pr ON sod.ProductID = pr.ProductID
 GROUP BY
-    C.LastName,
-    C.FirstName,
-    P.Name
+    p.LastName,
+    p.FirstName,
+    pr.Name
 HAVING
-    SUM(SOD.OrderQty) > 15
+    SUM(sod.OrderQty) > 15
 ORDER BY
-    Qty DESC,
-	C.LastName ASC,
-    C.FirstName ASC
+    SUM(sod.OrderQty) DESC,
+	p.LastName ASC,
+    p.FirstName ASC
+
+-- Вариант с выводом покупателя только один раз с товаром с самым большим количеством:
+SELECT
+    t.LastName AS LastName,
+    t.FirstName AS FirstName,
+    t.Name AS Product,
+    t.TotalOrderQty AS OrderQty
+FROM
+    (
+        SELECT
+            p.LastName,
+            p.FirstName,
+            pr.Name,
+            SUM(sod.OrderQty) AS TotalOrderQty,
+            ROW_NUMBER() OVER (PARTITION BY p.LastName, p.FirstName ORDER BY SUM(sod.OrderQty) DESC) AS RowNum
+        FROM
+            Sales.SalesOrderHeader AS soh
+            JOIN Sales.Customer AS c ON soh.CustomerID = c.CustomerID
+            JOIN Person.Person AS p ON c.PersonID = p.BusinessEntityID
+            JOIN Sales.SalesOrderDetail AS sod ON soh.SalesOrderID = sod.SalesOrderID
+            JOIN Production.Product AS pr ON sod.ProductID = pr.ProductID
+        GROUP BY
+            p.LastName,
+            p.FirstName,
+            pr.Name
+        HAVING
+            SUM(sod.OrderQty) > 15
+    ) AS t
+WHERE
+    t.RowNum = 1
+ORDER BY
+    t.TotalOrderQty DESC,
+	t.LastName ASC,
+    t.FirstName ASC
 
 -- Задание 5. Вывести содержимое первого заказа каждого клиента
-SELECT O.OrderDate AS 'Date', P.LastName AS 'LastName', P.FirstName AS 'FirstName',
-    STRING_AGG(PR.Name + ' Quantity: ' + CONVERT(NVARCHAR, OD.OrderQty) + ' pcs.', ' | ') AS 'Order'
-FROM Sales.SalesOrderHeader AS O
-INNER JOIN Person.Person AS P ON O.CustomerID = P.BusinessEntityID
-INNER JOIN Sales.SalesOrderDetail AS OD ON O.SalesOrderID = OD.SalesOrderID
-INNER JOIN Production.Product AS PR ON OD.ProductID = PR.ProductID
-WHERE O.SalesOrderID IN (
+SELECT soh.OrderDate AS Date, P.LastName AS LastName, P.FirstName AS FirstName,
+    STRING_AGG(PR.Name + ' Quantity: ' + CONVERT(NVARCHAR, sod.OrderQty) + ' pcs.', ' | ') AS 'Order'
+FROM
+    Sales.SalesOrderHeader AS soh
+    JOIN Sales.Customer AS c ON soh.CustomerID = c.CustomerID
+    JOIN Person.Person AS p ON c.PersonID = p.BusinessEntityID
+    JOIN Sales.SalesOrderDetail AS sod ON soh.SalesOrderID = sod.SalesOrderID
+    JOIN Production.Product AS pr ON sod.ProductID = pr.ProductID
+WHERE soh.SalesOrderID IN (
         SELECT MIN(SalesOrderID)
         FROM Sales.SalesOrderHeader
         GROUP BY CustomerID
     )
 GROUP BY
-    O.OrderDate,
+    soh.OrderDate,
     P.LastName,
     P.FirstName
-ORDER BY O.OrderDate DESC;
+ORDER BY soh.OrderDate DESC;
 
 -- Задание 6. Вывести список сотрудников, непосредственный руководитель которых младше сотрудника и меньше работает в компании
-	SELECT
-    CONCAT(p1.LastName, ' ', LEFT(p1.FirstName, 1), '.', LEFT(p1.MiddleName, 1), '.') AS 'Managers name',
-    e1.HireDate AS 'HireDate',
-    e1.BirthDate AS 'BirthDate',
-    CONCAT(p2.LastName, ' ', LEFT(p2.FirstName, 1), '.', LEFT(p2.MiddleName, 1), '.') AS 'Employee name',
-    e2.HireDate AS 'HireDate',
-    e2.BirthDate AS 'BirthDate'
+SELECT
+    CONCAT(p1.LastName, ' ', LEFT(p1.FirstName, 1), '.', LEFT(p1.MiddleName, 1), '.') AS ManagerName,
+    e1.HireDate AS HireDate,
+    e1.BirthDate AS BirthDate,
+    CONCAT(p2.LastName, ' ', LEFT(p2.FirstName, 1), '.', LEFT(p2.MiddleName, 1), '.') AS EmployeeName,
+    e2.HireDate AS HireDate,
+    e2.BirthDate AS BirthDate
 FROM
     HumanResources.Employee AS e1
-    INNER JOIN HumanResources.Employee AS e2 ON e2.OrganizationNode.IsDescendantOf(e1.OrganizationNode) = 1
+    INNER JOIN HumanResources.Employee AS e2 ON e2.OrganizationNode.GetAncestor(1) = e1.OrganizationNode
     INNER JOIN Person.Person AS p1 ON p1.BusinessEntityID = e1.BusinessEntityID
     INNER JOIN Person.Person AS p2 ON p2.BusinessEntityID = e2.BusinessEntityID
 WHERE
@@ -88,6 +131,6 @@ ORDER BY
 -- Задание 7. Написать хранимую процедуру, с тремя параметрами и результирующим набором данных  
 DECLARE @Count INT;
 
-EXEC GetSingleMaleEmployees '1980-01-01', '1995-12-31', @Count OUTPUT;
+EXEC GetEmployees '1980-01-01', '1995-12-31', @Count OUTPUT;
 
 SELECT @Count AS RecordCount;
